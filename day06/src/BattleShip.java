@@ -41,7 +41,7 @@ public class BattleShip {
         nameIndex++;
     }
 
-    //模拟开火，hitRate是
+    //模拟开火
     public void barrage(BattleShip target, float hitRate) {
         System.out.println(name + " 正在瞄准 " + target.getName());
         if (isCooling) { //判断武器是否可用，不可用时继续增加装填进度
@@ -54,7 +54,7 @@ public class BattleShip {
         }
 
         //命中算法，目标血量约低，命中率越低，自身以及目标航速越快，命中率约低
-        //只有当传入的随机数小于等于最终命中率时才算命中
+        //只有当传入的hitRate小于等于最终命中率时才算命中
         if (hitRate > hitChance * (float) (target.getHitpoint() / 5000) * (float) (50 / (target.getSpeed() + 50)) * (float) (30 * (30 + speed))) {
             System.out.println(name + " 的攻击没有命中 " + target.getName() + " !");
         } else {
