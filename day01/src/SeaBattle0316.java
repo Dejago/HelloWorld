@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class SeaBattle {
+public class SeaBattle0316 {
 
     //海战模拟
     public static void main(String[] args) {

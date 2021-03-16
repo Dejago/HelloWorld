@@ -3,7 +3,7 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Set;
 
-public class CharSum {
+public class CharSum0313 {
 
     public static void main(String[] args) {
 

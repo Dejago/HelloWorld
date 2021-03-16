@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class TestString {
+public class TestString0312 {
     public static void main(String[] args) {
 
         //由于字符串不可变的特性，以下对字符串的所有修改操作实际上都是返回了一个新的字符串

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class DayCheck {
+public class DayCheck0311 {
 
     public static void main(String[] args) {
 
