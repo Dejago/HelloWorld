@@ -27,24 +27,3 @@ public class Fruit0317 {
 }
 
 
-class Apple extends Fruit0317 {
-
-    Apple() {
-        super.type = "苹果";
-    }
-
-}
-
-class Banana extends Fruit0317 {
-
-    Banana() {
-        super.type = "香蕉";
-    }
-}
-
-class WaterMelon extends Fruit0317 {
-
-    WaterMelon() {
-        super.type = "西瓜";
-    }
-}
