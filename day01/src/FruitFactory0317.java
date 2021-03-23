@@ -1,13 +1,13 @@
 public class FruitFactory0317 {
 
-    public static Fruit0317 fruitGenerator(String type) {
+    public static Fruit0317 fruitGenerator(FruitType type) {
 
         switch (type) {
-            case "1" :
+            case APPLE:
                 return new Apple();
-            case "2" :
+            case BANANA:
                 return new Banana();
-            case "3" :
+            case WATERMELON:
                 return new WaterMelon();
             default:
                 System.out.println("输入错误！");

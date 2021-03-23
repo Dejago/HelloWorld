@@ -2,26 +2,35 @@ import java.util.Scanner;
 
 public class Fruit0317 {
 
-    String type;
+    FruitType type;
 
     Fruit0317() {
-        type = "水果";
+        type = FruitType.FRUIT;
     }
 
     void showInfo() {
-        System.out.println("这是一个" + type);
+        System.out.println("这是一个" + type.getType());
     }
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入想要生成的水果编号");
-        System.out.println("1：苹果");
-        System.out.println("2：香蕉");
-        System.out.println("3：西瓜");
-
-        Fruit0317 fruit = FruitFactory0317.fruitGenerator(scanner.next());
+        Fruit0317 fruit = FruitFactory0317.fruitGenerator(FruitType.APPLE);
         fruit.showInfo();
+    }
+
+}
+
+enum FruitType {
+
+    FRUIT("水果"), APPLE("苹果"), BANANA("香蕉"), WATERMELON("西瓜");
+
+    private String type;
+    FruitType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
 }
