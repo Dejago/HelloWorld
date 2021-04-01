@@ -1,31 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThreadProCumTest {
     public static void main(String[] args) {
 
+        List<String> cargo = new ArrayList<>();
+        Object lock = new Object();
+        Boolean isActive = true;
+
         int creatorNum = 5;
-        int customerNum = 20;
+        int consumerNum = 10;
+
 
         Thread[] creatorGroup = new Thread[creatorNum];
-        Thread[] customerGroup = new Thread[customerNum];
+        Thread[] consumerGroup = new Thread[consumerNum];
 
         for (int i = 0; i < creatorNum; i++) {
-            creatorGroup[i] = new Thread(new ThreadCreator0328(),"生产者" + (i + 1));
+            creatorGroup[i] = new Thread(new ThreadCreator0328(cargo, lock),"生产者" + (i + 1));
         }
 
         for (Thread creator : creatorGroup) {
             creator.start();
         }
 
-        for (int i = 0; i < customerNum; i++) {
-            customerGroup[i] = new Thread(new ThreadCustomer0328(),"顾客" + (i + 1));
+        for (int i = 0; i < consumerNum; i++) {
+            consumerGroup[i] = new Thread(new ThreadConsumer0328(cargo, lock),"顾客" + (i + 1));
         }
 
-        for (Thread customer : customerGroup) {
-            customer.start();
+        int count = 0;
+        for (Thread consumer : consumerGroup) {
+            //循环生成8次后中止所有线程
             try {
+                if (count == 8) {
+                    System.out.println("中断");
+                    for (Thread creator : creatorGroup) {
+                        creator.interrupt();
+                    }
+                    for (Thread con : consumerGroup) {
+                        con.interrupt();
+                    }
+                    break;
+                }
+                consumer.start();
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            count++;
         }
+
     }
 }
