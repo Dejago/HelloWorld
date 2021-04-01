@@ -22,13 +22,13 @@ public class ThreadCreator0328 implements Runnable {
         //System.out.println("生产者" + Thread.currentThread().getName() + "已启动！当前产品数量为：" + product + getTime());
 
         int count = 0;
-        //每个线程生产10次后自动停止
-        while (!Thread.currentThread().isInterrupted()) {
+
+        while (isActive) {
             try {
                 Thread.sleep(2000);  //每次生产后休息2秒
             } catch (InterruptedException e) {
-             //   e.printStackTrace();
-                Thread.currentThread().interrupt();
+                e.printStackTrace();
+             //   Thread.currentThread().interrupt();
             }
             addProduct(count);
             count++;

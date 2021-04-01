@@ -15,12 +15,12 @@ public class ThreadConsumer0328 implements Runnable{
     @Override
     public void run() {
        // System.out.println(Thread.currentThread().getName() + "已启动！正在进行购物！");
-        while (!Thread.currentThread().isInterrupted()) {  //每个顾客只购买3个东西！
+        while (isActive) {
             try {
                 Thread.sleep(3000);  //顾客购物后休息3秒
             } catch (InterruptedException e) {
-               // e.printStackTrace();
-                Thread.currentThread().interrupt();
+                e.printStackTrace();
+               // Thread.currentThread().interrupt();
             }
             trade();
         }
