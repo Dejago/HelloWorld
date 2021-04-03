@@ -62,7 +62,23 @@ public class ThreadProCumTest {
                 for (ThreadConsumer0328 consumer : consumers) {
                     consumer.setActive(false);
                 }
-                System.out.println("等待结束");
+                for (Thread creator : creatorGroup) {
+                    try {
+                        creator.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                for (Thread consumer : consumerGroup) {
+                    try {
+                        consumer.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                System.out.println("中止完成");
                 break;
             }
         }
