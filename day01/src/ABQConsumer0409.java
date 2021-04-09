@@ -27,6 +27,7 @@ public class ABQConsumer0409 extends Thread{
     @Override
     public void run() {
         int serial = 1;
+
         while (isActive) {
             String url = null;
             try {
@@ -51,6 +52,7 @@ public class ABQConsumer0409 extends Thread{
                 file.createNewFile();
                 FileWriter fw = new FileWriter(file);
                 fw.write(content);
+                fw.flush();
                 System.out.println("文件已输出：" + file.getAbsolutePath()); //debug
             } catch (IOException e) {
                 e.printStackTrace();
