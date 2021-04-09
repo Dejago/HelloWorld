@@ -72,6 +72,7 @@ public class ThreadProCumTest {
 
                 for (Thread consumer : consumerGroup) {
                     try {
+                        consumer.interrupt();
                         consumer.join();
                     } catch (InterruptedException e) {
                         e.printStackTrace();

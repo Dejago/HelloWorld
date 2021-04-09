@@ -1,7 +1,3 @@
-import jdk.nashorn.internal.ir.Block;
-import jdk.nashorn.internal.ir.BlockLexicalContext;
-
-import java.util.Date;
 import java.util.List;
 
 public class ThreadCreator0328 implements Runnable {
@@ -31,6 +27,7 @@ public class ThreadCreator0328 implements Runnable {
              //   Thread.currentThread().interrupt();
             }
             addProduct(count);
+            System.out.println("生产完毕");
             count++;
         }
 
