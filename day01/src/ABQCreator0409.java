@@ -1,4 +1,5 @@
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class ABQCreator0409 extends Thread {
 
@@ -30,7 +31,7 @@ public class ABQCreator0409 extends Thread {
             }
             String url = getUrl();
             try {
-                repository.put(url);
+                repository.offer(url, 100, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
                 System.out.println(super.getName() + " has been interrupted!!!!!");
             }

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class ABQConsumer0409 extends Thread{
 
@@ -31,7 +32,7 @@ public class ABQConsumer0409 extends Thread{
         while (isActive) {
             String url = null;
             try {
-                url = repository.take();  //从仓库中取出URL
+                url = repository.poll(100, TimeUnit.MILLISECONDS);  //从仓库中取出URL
                 System.out.println(super.getName() + "取出URL：" + url); //debug
             } catch (InterruptedException e) {
                 System.out.println(super.getName() + " has been interrupted!!!!!");
