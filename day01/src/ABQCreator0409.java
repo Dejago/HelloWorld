@@ -23,24 +23,24 @@ public class ABQCreator0409 extends Thread {
 
     @Override
     public void run() {
+        String url = ABQProject0409.IGNORE;
+        boolean notFull = false;
         while(isActive) {
             try {
-                Thread.sleep(1000);
+                notFull = repository.offer(url, 100, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
                 System.out.println(super.getName() + " has been interrupted!!!!!");
+
             }
-            String url = getUrl();
-            try {
-                repository.offer(url, 100, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
-                System.out.println(super.getName() + " has been interrupted!!!!!");
+            if (notFull) {
+                url = getUrl();
             }
 
-            //debug 控制数量
+/*            //debug 控制数量
             if (testCount >= 20) {
                 isActive = false;
                 System.out.println("生产者完成");
-            }
+            }*/
         }
     }
 

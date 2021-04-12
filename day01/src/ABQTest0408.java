@@ -14,11 +14,19 @@ public class ABQTest0408 {
         String receive = null;
 
 
-        //add添加传入元素到队列中的当前存位putIndex上，会直接调用其父类的offer方法，添加成功会返回true，如果队列是满的会抛出Queue Full
+        //add添加传入元素到队列中的当前存位putIndex上，会直接调用其父类的offer方法，添加成功会返回true，如果队列是满的会抛出IllegalStateException
         abq.add("1、add添加的元素");
+        //element会返回当前取位takeIndex上的元素，会直接调用peek，若已空会抛出NoSuchElementException
+        receive = abq.element();
+        System.out.println(receive);
         //peek会返回当前取位takeIndex上的元素，不会对队列做任何操作
         receive = abq.peek();
         System.out.println(receive);
+        //remove会返回当前取位takeindex的元素，并将对应位置的元素变为null，会直接调用poll方法，如果队列已空会排除NoSuchElementException
+        receive = abq.remove();
+        System.out.println(receive);
+        //remove带参数版，会删除队列中第一个指定元素，使用equals判断，会调用removeAt，若删除成功返回true，否则返回false
+        //removeAt删除给定下标的元素，并将后面的元素前移
 
 
         try {

@@ -4,6 +4,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class ABQProject0409 {
 
+    public static final String IGNORE = "IGNORE";
+
     public static void main(String[] args) {
 
         ArrayBlockingQueue<String> repository = new ArrayBlockingQueue<>(5,false);

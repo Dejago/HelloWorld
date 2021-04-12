@@ -33,32 +33,47 @@ public class ABQConsumer0409 extends Thread{
             String url = null;
             try {
                 url = repository.poll(100, TimeUnit.MILLISECONDS);  //从仓库中取出URL
-                System.out.println(super.getName() + "取出URL：" + url); //debug
+                //System.out.println(super.getName() + "取出URL：" + url); //debug
             } catch (InterruptedException e) {
                 System.out.println(super.getName() + " has been interrupted!!!!!");
             }
-            String content = getContent(url);  //把取出的url传入对应的方法中，从而获取内容
-            System.out.println(super.getName() + "获得内容：" + content);  //debug
-
-            String fileDirectory = FILE_CONTEXT + super.getName();
-            String fileName = serial++ + ".txt";
-            File filePath = new File(fileDirectory);
-            if (!filePath.exists())
-                filePath.mkdirs();
-            File file = new File(filePath + SEPARATOR + fileName);
-            try {
-                if (file.exists()) {
-                    file.delete();
-                }
-                file.createNewFile();
-                FileWriter fw = new FileWriter(file);
-                fw.write(content);
-                fw.flush();
-                System.out.println("文件已输出：" + file.getAbsolutePath()); //debug
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (url != null && !url.equals(ABQProject0409.IGNORE) && !url.isEmpty()) {
+                String content = getContent(url);  //把取出的url传入对应的方法中，从而获取内容
+                //System.out.println(super.getName() + "获得内容：" + content);  //debug
+                String fileDirectory = fileDirectory();
+                String fileName = filename(url, serial++);
+                download(fileDirectory, fileName, content);
             }
+        }
 
+    }
+
+    private String fileDirectory() {
+        return FILE_CONTEXT + super.getName();
+    }
+
+    private String filename(String url, int serial) {
+        return "url" + serial + ".txt";
+    }
+
+    private boolean download(String fileDirectory, String fileName, String content) {
+        File filePath = new File(fileDirectory);
+        if (!filePath.exists())
+            filePath.mkdirs();
+        File file = new File(filePath + SEPARATOR + fileName);
+        try {
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            fw.write(content);
+            fw.flush();
+            System.out.println("文件已输出：" + file.getAbsolutePath()); //debug
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
 
     }
