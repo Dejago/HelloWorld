@@ -1,3 +1,5 @@
+package CharSum0314;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Scanner;

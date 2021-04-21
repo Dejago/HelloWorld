@@ -1,10 +1,10 @@
+package ABQCreatorAndConsumer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class ABQProject0409 {
-
-    public static final String IGNORE = "IGNORE";
 
     public static void main(String[] args) {
 

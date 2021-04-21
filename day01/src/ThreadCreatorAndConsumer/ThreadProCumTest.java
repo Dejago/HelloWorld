@@ -1,3 +1,5 @@
+package ThreadCreatorAndConsumer;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,7 +87,7 @@ public class ThreadProCumTest {
         }
 
         /*for (int i = 0; i < creatorNum; i++) {
-            creatorGroup[i] = new Thread(new ThreadCreator0328(cargo, lock),"生产者" + (i + 1));
+            creatorGroup[i] = new Thread(new ThreadCreatorAndConsumer.ThreadCreator0328(cargo, lock),"生产者" + (i + 1));
         }*/
 
         /*for (Thread creator : creatorGroup) {
@@ -95,7 +97,7 @@ public class ThreadProCumTest {
 
 
         /*for (int i = 0; i < consumerNum; i++) {
-            consumerGroup[i] = new Thread(new ThreadConsumer0328(cargo, lock),"顾客" + (i + 1));
+            consumerGroup[i] = new Thread(new ThreadCreatorAndConsumer.ThreadConsumer0328(cargo, lock),"顾客" + (i + 1));
         }
 
         int count = 0;

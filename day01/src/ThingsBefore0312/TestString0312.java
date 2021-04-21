@@ -1,10 +1,12 @@
+package ThingsBefore0312;
+
 import java.util.Arrays;
 
 public class TestString0312 {
     public static void main(String[] args) {
 
         //由于字符串不可变的特性，以下对字符串的所有修改操作实际上都是返回了一个新的字符串
-        String str = "HelloWorld";
+        String str = "ThingsBefore0312.HelloWorld";
         char[] chars = str.toCharArray(); //将字符串变成字符数组
         System.out.println(Arrays.toString(chars));
         str = str.concat("!");  //用concat进行字符串拼接

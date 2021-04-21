@@ -1,3 +1,5 @@
+package ThingsBefore0312;
+
 import java.util.Random;
 
 public class SeaBattle0316 {

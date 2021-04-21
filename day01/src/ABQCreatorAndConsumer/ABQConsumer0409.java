@@ -1,3 +1,7 @@
+package ABQCreatorAndConsumer;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -5,9 +9,11 @@ import java.util.concurrent.TimeUnit;
 public class ABQConsumer0409 extends Thread{
 
     private ArrayBlockingQueue<String> repository;
-    private String name;
+
     private boolean isActive;
+
     private static final String SEPARATOR = File.separator;
+
     // D:\\AQB\\
     private static final String FILE_CONTEXT = "D:" + SEPARATOR + "AQB" +SEPARATOR;
 
@@ -15,14 +21,18 @@ public class ABQConsumer0409 extends Thread{
     private static int testCount;
 
     public ABQConsumer0409(ArrayBlockingQueue<String> repository) {
-        this(repository,null);
+        this.repository = repository;
+        this.isActive = true;
     }
 
     public ABQConsumer0409(ArrayBlockingQueue<String> repository, String name) {
-        this.repository = repository;
-        if (name != null)
+        if(StringUtils.isEmpty(name)) {
             super.setName(name);
-        isActive = true;
+            this.repository = repository;
+            this.isActive = true;
+        }else {
+            new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -30,29 +40,31 @@ public class ABQConsumer0409 extends Thread{
         int serial = 1;
 
         while (isActive) {
-            String url = null;
             try {
-                url = repository.poll(100, TimeUnit.MILLISECONDS);  //从仓库中取出URL
+                String url = repository.poll(100, TimeUnit.MILLISECONDS);  //从仓库中取出URL
                 //System.out.println(super.getName() + "取出URL：" + url); //debug
+                urlHandle(serial++, url);
             } catch (InterruptedException e) {
                 System.out.println(super.getName() + " has been interrupted!!!!!");
             }
-            if (url != null && !url.equals(ABQProject0409.IGNORE) && !url.isEmpty()) {
-                String content = getContent(url);  //把取出的url传入对应的方法中，从而获取内容
-                //System.out.println(super.getName() + "获得内容：" + content);  //debug
-                String fileDirectory = fileDirectory();
-                String fileName = filename(url, serial++);
-                download(fileDirectory, fileName, content);
-            }
         }
+    }
 
+    private void urlHandle(int serial, String url) {
+        if (url != null && !url.isEmpty()) {
+            String content = getContent(url);  //把取出的url传入对应的方法中，从而获取内容
+            //System.out.println(super.getName() + "获得内容：" + content);  //debug
+            String fileDirectory = fileDirectory();
+            String fileName = filename(serial);
+            download(fileDirectory, fileName, content);
+        }
     }
 
     private String fileDirectory() {
         return FILE_CONTEXT + super.getName();
     }
 
-    private String filename(String url, int serial) {
+    private String filename(int serial) {
         return "url" + serial + ".txt";
     }
 
@@ -75,13 +87,11 @@ public class ABQConsumer0409 extends Thread{
             e.printStackTrace();
             return false;
         }
-
     }
 
     private String getContent(String url) {
         return url + " || Content:" + testCount;
     }
-
 
     public void closingSystem() {
         isActive = false;

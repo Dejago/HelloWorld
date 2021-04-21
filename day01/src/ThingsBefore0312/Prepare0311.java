@@ -1,3 +1,5 @@
+package ThingsBefore0312;
+
 public class Prepare0311 {
     public static void main(String[] args) {
 
@@ -51,7 +53,7 @@ public class Prepare0311 {
 
         //字符与字符串
         char c = 'v';//
-        String str = "HelloWorld";
+        String str = "ThingsBefore0312.HelloWorld";
         //字符串拼接的N种方法
         String str1 = "Hello";
         String str2 = "World";

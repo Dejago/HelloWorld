@@ -1,3 +1,5 @@
+package FruitFactory0317;
+
 public class FruitFactory0317 {
 
     public static Fruit0317 fruitGenerator(FruitType type) {

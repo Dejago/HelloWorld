@@ -1,3 +1,5 @@
+package ThingsBefore0312;
+
 import java.util.Scanner;
 
 public class DayCheck0311 {

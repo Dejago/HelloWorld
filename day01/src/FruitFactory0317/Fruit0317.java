@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package FruitFactory0317;
 
 public class Fruit0317 {
 

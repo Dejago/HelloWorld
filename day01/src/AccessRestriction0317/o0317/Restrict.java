@@ -1,4 +1,4 @@
-package o0317;
+package AccessRestriction0317.o0317;
 
 public class Restrict {
 
