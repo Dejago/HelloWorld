@@ -7,7 +7,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class ABQProject0409 {
 
     public static void main(String[] args) {
-
         ArrayBlockingQueue<String> repository = new ArrayBlockingQueue<>(5,false);
         List<ABQCreator0409> creators = new ArrayList<>();
         List<ABQConsumer0409> consumers = new ArrayList<>();
@@ -39,14 +38,11 @@ public class ABQProject0409 {
 
         System.out.println("开始关闭生产者...");
         for (ABQCreator0409 creator : creators) {
-            creator.closingSystem();
+            creator.waitForCompletion();
         }
         System.out.println("开始关闭消费者...");
         for (ABQConsumer0409 consumer : consumers) {
-            consumer.closingSystem();
+            consumer.waitForCompletion();
         }
-
-
-
     }
 }

@@ -1,31 +1,33 @@
-package ABQCreatorAndConsumer;
+package ThreadPool;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class ABQConsumer0409 extends Thread {
+public class ThreadPoolConsumer extends Thread {
 
     private ArrayBlockingQueue<String> repository;
 
     private boolean isActive;
 
+    //系统分隔符
     private static final String SEPARATOR = File.separator;
 
     // D:\\AQB\\
     private static final String FILE_CONTEXT = "D:" + SEPARATOR + "AQB" + SEPARATOR;
 
-    //this number is used for debugging
     private static int testCount;
 
-    public ABQConsumer0409(ArrayBlockingQueue<String> repository) {
+    public ThreadPoolConsumer(ArrayBlockingQueue<String> repository) {
         this.repository = repository;
         this.isActive = true;
     }
 
-    public ABQConsumer0409(ArrayBlockingQueue<String> repository, String name) {
+    public ThreadPoolConsumer(ArrayBlockingQueue<String> repository, String name) {
         if (StringUtils.isNotEmpty(name)) {
             super.setName(name);
             this.repository = repository;
@@ -41,22 +43,29 @@ public class ABQConsumer0409 extends Thread {
 
         while (isActive) {
             try {
-                String url = repository.poll(100, TimeUnit.MILLISECONDS);  //从仓库中取出URL
-                //System.out.println(super.getName() + "取出URL：" + url); //debug
-                urlHandle(serial++, url);
+                String url = repository.poll(100, TimeUnit.MILLISECONDS);
+                boolean isSuccess = urlHandle(serial, url);
+                if (isSuccess) {
+                    serial++;
+                }
             } catch (InterruptedException e) {
-                System.out.println(super.getName() + " has been interrupted!!!!!");
+                System.out.println(super.getName() + " has been interrupted");
+            } catch (IllegalArgumentException e) {
+                //如果url为空串时所做的处理
             }
         }
     }
 
-    private void urlHandle(int serial, String url) {
+    private boolean urlHandle(int serial, String url) {
         if (StringUtils.isNotEmpty(url)) {
-            String content = this.getContent(url);  //把取出的url传入对应的方法中，从而获取内容
-            //System.out.println(super.getName() + "获得内容：" + content);  //debug
+            String content = this.getContent(url);
             String fileDirectory = this.fileDirectory();
             String fileName = this.filename(serial);
             this.download(fileDirectory, fileName, content);
+            return true;
+        } else {
+            new IllegalArgumentException();
+            return false;
         }
     }
 
